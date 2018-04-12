@@ -1,0 +1,26 @@
+version: '2.0'
+
+services:
+ jenkins-data:
+  build: ./jenkins-data
+  volumes:
+    - /opt/jenkins_home:/var/jenkins_home 
+    
+ jenkins-master:
+  build: ./jenkins2-docker
+  ports:
+    - "8080:8080"
+    - "5000:5000"
+  volumes_from:
+    - jenkins-data  
+  depends_on:
+    - jenkins-data  
+
+ androidsdk:
+  build: ./androidsdk 
+  volumes_from:
+    - jenkins-data  
+  depends_on:
+    - jenkins-data
+    - jenkins-master
+
