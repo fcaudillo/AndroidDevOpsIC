@@ -82,6 +82,9 @@ echo "Construyecto el docker compose"
 cd /vagrant/stacks
 /usr/local/bin/docker-compose build
 
+echo "Cambiando permisos rw /opt/jenkins_home/"
+chmod -R ugo+rw /opt/jenkins_home/
+
 echo "Ejecutando el docker compose"
 nohup /usr/local/bin/docker-compose up -d &
 

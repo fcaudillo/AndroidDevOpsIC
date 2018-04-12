@@ -1,14 +1,19 @@
-# vagrant-centos-7.1-dev-docker
-Vagrantbox with CentOS 7.1, docker development based on "bento/centos-7.1" image
+# vagrant-centos-7.1-dev-android- docker
+Vagrantbox con CentOS 7.1, basado sobre "bento/centos-7.1" image
 
 [![GitHub version](https://badge.fury.io/gh/elegoevvag%2Fvagrant-centos-7.1-dev-docker.svg)](https://badge.fury.io/gh/elegoevvag%2Fvagrant-centos-7.1-dev-docker)
 [![Stories in Ready](https://badge.waffle.io/elegoevvag/vagrant-centos-7.1-dev-docker.png?label=ready&title=Ready)](https://waffle.io/elegoevvag/vagrant-centos-7.1-dev-docker)
 
-## Box Environment
-* Operation System: CentOS 7.1
-* Users `root/vagrant` & `vagrant/vagrant`
 
-## Prerequisites
+## Objetivo
+
+Crear un ambiente de desarrollo de integracion continua para android, utilizando contenedores docker, Ademas de una prueba de concepto que se pueda verificar la instalacion.
+
+## Ambiente
+* Systema Operativo: CentOS 7.1
+* Usuario `root/vagrant` & `vagrant/vagrant`
+
+## Prerequisitos
 
 1. Virtualbox 5.0.12 with guest edition
 1. Vagrant 1.8.0
@@ -36,84 +41,35 @@ VirtualBox is an open source virtualizer, an application that can run an entire 
 1. Run the installer, choosing all defaults.
 1. Reboot your if prompted to do so when installation completes.
 
-### Packer
-[Packer](https://www.packer.io/) is a tool for creating machine and container images for multiple platforms from a single source configuration.
+## Aplicaciones instaladas en CentOS
 
-1. [Download] (https://www.packer.io/downloads.html) the installer for your operating system using the links below.
-1. Run the installer
+1. [Docker version 18.04.0-ce](https://www.docker.com/)
+1. [docker-compose version 1.9.0](https://docs.docker.com/compose/)
+1. [git version 1.8.3.1](https://git-scm.com/)
 
-## Applications
-1. [ruby 2.2.3](https://www.ruby-lang.org/de/)
-1. [ultrahook](http://www.ultrahook.com/)
-1. [docker 1.9](https://www.docker.com/)
-1. [docker-compose 1.5.2](https://docs.docker.com/compose/)
-1. [git 2.6.4](https://git-scm.com/)
-1. [atom 1.2.4 editor](https://atom.io/)
 
 ## Scripts
-#### packer-build.sh
-Create new vagrant box based on virtual machine `vagrant-centos-7.1-dev-docker`
 #### vagrant_dev-docker_provision.sh
-Vagrant provisioning script
-#### packer_dev-docker_provision.sh
-Packer provisioning script
+Instalacion de docker, docker-compose, docker, utilerias, etc.
 
-## configuration
-### xrdp
-* km-0807.ini - swiss german keyboard file
-* xrdp.repo - xrdp repo configuration file
 
-#### packer
-* packer-vagrant-centos-7.1-dev-docker.json - packer configuration file
-
-## How to create & test vagrant box
-* create vagrant box with `vagrant up`
-* test & modify created vagrant box
-* package vagrant box and push it to atlas `./packer-build.sh`
-* test uploaded vagrant box `cd test; ./test-vagrantbox.sh`
+## Creacion de la infraestructura de integracion continua.
+* vagrant up -d
+Con este comando levantamos nuestro ambiente de desarrollo.
 
 ## Configuration
-### atom plugins
-* language-docker
-* language-mongodb
-* language-coffee-script-angular
-* language-nginx
-* emmet
-* javascript-snippets
-* javascript-standard-snippets
-* angularjs
-* angularjs-helper
-* angular-jonpapa-snippets
-* angularjs-snippets
-* standard-angularjs-snippets
-* angularjs-boilerplate-snippets
-* markdown-preview-plus-opener
 
-## Provisioning
-### vagrant_dev-docker_provisioning.sh
-* Copy bash environment (.bash_profile & .bashrc)
-* Copy git prompt script (git-prompt.sh)
-* Installs all referenced applications
-* Copy script directory to /var/docker/scripts
-* Starts docker deamon
+* Configurar jenkins, crear un usuario y password de administracion, seguir los pasos definidos en http://localhost:8081 de su instancia ya ejecutandose en su equipo.
 
-### Scripts
-#### do_nsenter.sh
-Shell script to `nsenter` into a container (usage: do_nsenter.sh "container name")
-#### git_removetag.sh
-Shell script to delete a tag (local & remote) (usage: git_removetag.sh "tag name")
 
-### Aliases
-* go_script - go to script directory
 
-## Versioning
-Repository follows sematic versioning  [![](https://img.shields.io/badge/semver-2.0.0-green.svg)](http://semver.org)
+## Repositorios de github necesarios.
+El codigo fuente de la aplicacion y su pipeline.  [![](https://github.com/fcaudillo/DockerCD)
 
-## Changelog
-For all notable changes see [CHANGELOG](https://github.com/elegoevvag/vagrant-centos-7.1-dev-docker/blob/master/CHANGELOG.md)
+## Mas información.
+Dentro de este repositorio se encuentra un documento word para un mayor detalle.
 
-## License
-Licensed under The MIT License (MIT) - for the full copyright and license information, please view the [LICENSE](https://github.com/elegoevvag/vagrant-centos-7.1-dev-docker/blob/master/LICENSE) file.
 
-## Issue Reporting
-Any and all feedback is welcome.  Please let me know of any issues you may find in the bug tracker on github. You can find it [here. ](https://github.com/elegoevvag/vagrant-centos-7.1-dev-docker/issues)
+## Mejoras al proyecto
+
+Por el momento al provisionar la maquina virtual con vagrant, se levanta el docker-compose, este tendria que ejecutarse mejor durante el arranque del centos.
